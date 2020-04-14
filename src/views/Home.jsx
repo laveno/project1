@@ -112,11 +112,23 @@ export default class Home extends Component {
 
     render() {
         return (
-            <div className="">
+            <div>
+
+                <div className="mb-2 w-25">
+                    <TotalConfirmed 
+                    Confirmed={this.state.Confirmed}
+                    />
+                </div>
+
+                <div className="w-25">
+                    <Confirmed
+                    Confirmed={this.state.Confirmed}
+                    Combined_Key={this.state.Combined_Key}
+                    Country_Region={this.state.Country_Region}
+                    />
+                </div>
+
             </div>
         )
     }
 }
-/*<div className="mb-2 w-25"><TotalConfirmed data={this.state.data} /></div>
-<div className="w-25"><Confirmed data={this.state.data} /></div>
-<span className="w-50 h-100"> <MapChart /> </span>*/
