@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
-import * as d3 from 'd3';
 
 export default class TotalConfirmed extends Component {
 
     render() {
         console.log(this.props.data)
 
-        if (this.data) {
+        if (this.props.data) {
             var confirmed_cases = 0;
 
-            console.log(this.data)
-            const confirmeds = this.data.map((confirmed, index) =>
+            console.log(this.props.data)
+            const confirmeds = this.props.data.map((confirmed, index) =>
                 confirmed_cases = confirmed_cases + Number(confirmed.Confirmed)
             )
 
