@@ -19,7 +19,6 @@ export default class Confirmed extends Component {
                 data.push(tab)
                 tab = []
             }
-            console.log(data)
 
             // this.props.Confirmed.map((combined_key, index) =>
             //     <button className="text-center p-0 m-0 list-group-item list-group-item-action list-group-item-dark" key={this.props.Country_Region + index}>
