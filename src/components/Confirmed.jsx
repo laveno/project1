@@ -6,12 +6,19 @@ export default class Confirmed extends Component {
         
         if (this.props.Confirmed && this.props.Combined_Key && this.props.Country_Region) {
             let data = []
-            this.props.Confirmed.map((confirmed, index) =>
+            let tab = []
+            /*this.props.Confirmed.map((confirmed, index) =>
                 data.push(confirmed)
             )
             this.props.Combined_Key.map((combined_key, index) =>
                 data.push(combined_key)
-            )
+            )*/
+            for (var i = 0; this.props.Confirmed[i]; i++) {
+                tab.push(this.props.Confirmed[i])
+                tab.push(this.props.Combined_Key[i])
+                data.push(tab)
+                tab = []
+            }
             console.log(data)
 
             // this.props.Confirmed.map((combined_key, index) =>

@@ -31,7 +31,28 @@ export default class Home extends Component {
         axios.get('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/04-08-2020.csv')
         .then(res => {
             const data = res.data;
-            const parse = readString(res.data)
+            console.log(res.data)
+            var lines=res.data.split("\n");
+
+            var result = [];
+          
+            var headers=lines[0].split(",");
+          
+            for(var i=1;i<lines.length;i++){
+          
+                var obj = {};
+                var currentline=lines[i].split(",");
+          
+                for(var j=0;j<headers.length;j++){
+                    obj[headers[j]] = currentline[j];
+                }
+          
+                result.push(obj);
+          
+            }
+            console.log(JSON.stringify(result))
+            //return JSON.stringify(result);
+           /* const parse = readString(res.data)
             sstate.setState({ data: parse.data})
             var tab = []
             var i = 1
@@ -104,7 +125,7 @@ export default class Home extends Component {
             for (i = 1; parse.data[i]; i++) {
                 tab.push(parse.data[i][11])
             }
-            sstate.setState({ Combined_Key: tab})
+            sstate.setState({ Combined_Key: tab})*/
             //console.log(sstate.state.Combined_Key)
         })
         .catch(e => {console.log(e)});
@@ -113,8 +134,11 @@ export default class Home extends Component {
     render() {
         return (
             <div>
-
-                <div className="mb-2 w-25">
+            </div>
+        )
+    }
+}
+/* <div className="mb-2 w-25">
                     <TotalConfirmed 
                     Confirmed={this.state.Confirmed}
                     />
@@ -127,8 +151,4 @@ export default class Home extends Component {
                     Country_Region={this.state.Country_Region}
                     />
                 </div>
-
-            </div>
-        )
-    }
-}
+*/
