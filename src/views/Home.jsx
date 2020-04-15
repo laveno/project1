@@ -28,7 +28,16 @@ export default class Home extends Component {
 
     componentDidMount() {
         const sstate = this
-        axios.get('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/04-08-2020.csv')
+        var date = new Date().getDate() - 2;
+        var month = new Date().getMonth() + 1;
+        var year = new Date().getFullYear();
+        if (date.toString().length == 1)
+            date = "0" + date
+        if (month.toString().length == 1)
+            month = "0" + month
+        var actual_date = month + "-" + date + "-" + year
+        console.log(actual_date)
+        axios.get('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/' + actual_date + '.csv')
         .then(res => {
             const data = res.data;
             console.log(res.data)
