@@ -11,7 +11,7 @@ export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
+            data: null,
             Active: [],
             Admin2: [],
             Combined_Key: [],
@@ -27,6 +27,10 @@ export default class Home extends Component {
         };
     }
 
+    componentDidUpdate() {
+        //console.log(this.state.data)
+    }
+
     componentDidMount() {
         const sstate = this
         var date = new Date().getDate() - 2;
@@ -38,20 +42,29 @@ export default class Home extends Component {
             month = "0" + month
         var actual_date = month + "-" + date + "-" + year
  
-        d3.csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/' + actual_date + '.csv', function(data, error) {
-            if (data) {
-                sstate.setState({data: data})
+        var tab = []
+        var i = 0
+        d3.csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/' + actual_date + '.csv', function(dataa, error) {
+            if (dataa) {
+                tab[i] = dataa
+                i++
+                //sstate.setState({data: dataa})
+                //console.log(dataa)
+                //console.log("new passage")
             } else {
                console.log(error)
             }
-        });
+        }).then(function(dataa) {
+            console.log(tab)
+            sstate.setState({data: tab})
+        })
 
     }
 
     render() {
-        console.log(this.state.data)
         return (
-            <div className="mb-2 w-25">
+            <div className="row">
+                <div className="mb-2 w-25"><TotalConfirmed data={this.state.data}/></div>
             </div>
         )
     }
