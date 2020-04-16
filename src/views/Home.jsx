@@ -55,7 +55,6 @@ export default class Home extends Component {
                console.log(error)
             }
         }).then(function(dataa) {
-            console.log(tab)
             sstate.setState({data: tab})
         })
 
@@ -63,8 +62,9 @@ export default class Home extends Component {
 
     render() {
         return (
-            <div className="row">
+            <div className="d-flex flex-column">
                 <div className="mb-2 w-25"><TotalConfirmed data={this.state.data}/></div>
+                <div className="mb-2 w-25"><Confirmed data={this.state.data}/></div>
             </div>
         )
     }
