@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import Confirmed from "../components/Confirmed"
 import TotalConfirmed from "../components/TotalConfirmed"
 import MapChart from "../components/MapChart"
-import axios from 'axios'
-import { readString } from 'react-papaparse'
 import * as d3 from 'd3';
 
 
@@ -12,23 +10,13 @@ export default class Home extends Component {
         super(props);
         this.state = {
             data: null,
-            Active: [],
-            Admin2: [],
-            Combined_Key: [],
-            Confirmed: [],
-            Country_Region: [],
-            Deaths: [],
-            FIPS: [],
-            Last_Update: [],
-            Lat: [],
-            Long_: [],
-            Province_State: [],
-            Recovered: []
+            totalConfirmed: null
         };
+        this.setNameTarget = this.setNameTarget.bind(this);
     }
 
-    componentDidUpdate() {
-        //console.log(this.state.data)
+    setNameTarget(value) {
+        this.setState({totalConfirmed: value})
     }
 
     componentDidMount() {
@@ -36,9 +24,9 @@ export default class Home extends Component {
         var date = new Date().getDate() - 2;
         var month = new Date().getMonth() + 1;
         var year = new Date().getFullYear();
-        if (date.toString().length == 1)
+        if (date.toString().length === 1)
             date = "0" + date
-        if (month.toString().length == 1)
+        if (month.toString().length === 1)
             month = "0" + month
         var actual_date = month + "-" + date + "-" + year
  
@@ -48,14 +36,17 @@ export default class Home extends Component {
             if (dataa) {
                 tab[i] = dataa
                 i++
-                //sstate.setState({data: dataa})
-                //console.log(dataa)
-                //console.log("new passage")
             } else {
                console.log(error)
             }
         }).then(function(dataa) {
             sstate.setState({data: tab})
+            var confirmed_cases = 0;
+            sstate.state.data.map((confirmed, index) => {
+                confirmed_cases = confirmed_cases + Number(confirmed.Confirmed)
+            })
+            console.log(confirmed_cases)
+            sstate.setState({totalConfirmed: confirmed_cases})
         })
 
     }
@@ -63,8 +54,8 @@ export default class Home extends Component {
     render() {
         return (
             <div className="d-flex flex-column">
-                <div className="mb-2 w-25"><TotalConfirmed data={this.state.data}/></div>
-                <div className="mb-2 w-25"><Confirmed data={this.state.data}/></div>
+                <div className="mb-2 w-25"><TotalConfirmed data={this.state.data} total={this.state.totalConfirmed}/></div>
+                <div className="mb-2 w-25"><Confirmed data={this.state.data} setName={this.setNameTarget}/></div>
             </div>
         )
     }
