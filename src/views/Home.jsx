@@ -47,7 +47,6 @@ export default class Home extends Component {
             sstate.state.data.map((confirmed, index) => {
                 confirmed_cases = confirmed_cases + Number(confirmed.Confirmed)
             })
-            console.log(confirmed_cases)
             sstate.setState({totalConfirmed: confirmed_cases})
 
             var tab2 = []
