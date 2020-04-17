@@ -4,7 +4,7 @@ export default class Confirmed extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            targetedTab: 0,
+            targetedTab: -1,
             admin0Data: [],
             admin1Data: [],
             admin2Data: []
@@ -111,11 +111,21 @@ export default class Confirmed extends Component {
     }
     render() {
         
-        if (this.props.data) {
+        if (this.props.data && this.props.defaultConfirmed) {
 
             var display
 
-            if (this.state.targetedTab === 0) {
+            if (this.state.targetedTab === -1) {
+
+                display = this.props.defaultConfirmed.map((data, index) => 
+                    <button href="#" className="list-group-item list-group-item-action bg-dark btn btn-dark" onClick={this.props.setName.bind(this, data.Confirmed, data.Country)} key={index}>
+                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"20px"}} className="font-weight-bold">{data.Confirmed ? data.Confirmed : 'unknow'}</span>
+                        <span>&emsp;</span>
+                        <span className="text-white">{data.Country ? data.Country : 'unknow'}</span>
+                    </button>
+                )
+            }
+            else if (this.state.targetedTab === 0) {
 
                 display = this.state.admin0Data.map((data, index) => 
                     <button href="#" className="list-group-item list-group-item-action bg-dark btn btn-dark" onClick={this.props.setName.bind(this, data.Confirmed, data.Country)} key={index}>
