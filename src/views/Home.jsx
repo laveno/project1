@@ -3,6 +3,7 @@ import Confirmed from "../components/Confirmed"
 import TotalConfirmed from "../components/TotalConfirmed"
 import MapChart from "../components/MapChart"
 import * as d3 from 'd3';
+import LastUpdate from '../components/LastUpdate';
 
 
 export default class Home extends Component {
@@ -48,14 +49,24 @@ export default class Home extends Component {
             console.log(confirmed_cases)
             sstate.setState({totalConfirmed: confirmed_cases})
         })
-
     }
 
     render() {
         return (
             <div className="d-flex flex-column">
-                <div className="mb-2 w-25"><TotalConfirmed data={this.state.data} total={this.state.totalConfirmed}/></div>
-                <div className="mb-2 w-25"><Confirmed data={this.state.data} setName={this.setNameTarget}/></div>
+
+                <div className="mb-2 w-25">
+                    <TotalConfirmed data={this.state.data} total={this.state.totalConfirmed}/>
+                </div>
+
+                <div className="mb-2 w-25">
+                    <Confirmed data={this.state.data} setName={this.setNameTarget}/>
+                </div>
+
+                <div className="w-25">
+                    <LastUpdate data={this.state.data}/>
+                </div>
+
             </div>
         )
     }

@@ -6,7 +6,7 @@ import Home from "./views/Home";
 function App() {
 
   return (
-    <div style={{backgroundColor: "#24282c"}}>
+    <div style={{backgroundColor: "#24282c", width:'100%'}}>
       <Router>
         <Route path='/' exact component={Home} />
       </Router>
