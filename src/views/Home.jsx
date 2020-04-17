@@ -11,7 +11,8 @@ export default class Home extends Component {
         super(props);
         this.state = {
             data: null,
-            totalConfirmed: null
+            totalConfirmed: null,
+            defaultConfirmed: null
         };
         this.setNameTarget = this.setNameTarget.bind(this);
     }
@@ -42,12 +43,42 @@ export default class Home extends Component {
             }
         }).then(function(dataa) {
             sstate.setState({data: tab})
-            var confirmed_cases = 0;
+            var confirmed_cases = 0;                                                // Default State of Total Confirmed Component
             sstate.state.data.map((confirmed, index) => {
                 confirmed_cases = confirmed_cases + Number(confirmed.Confirmed)
             })
             console.log(confirmed_cases)
             sstate.setState({totalConfirmed: confirmed_cases})
+
+            var tab2 = []
+            var country = null
+            sstate.state.data.map((column, index) => {
+                country = column.Country_Region
+                for (var x = 0; tab2[x]; x++) {
+                    if (country === tab2[x].Country) {
+                        tab2[x].Confirmed += Number(column.Confirmed)
+                        break;
+                    }
+                    if (tab2[x + 1] == null) {
+                        tab2.push({
+                            Confirmed: Number(column.Confirmed),
+                            Country: country
+                        })
+                        break;
+                    }
+                }
+                if (tab2.length === 0) {
+                    tab2.push({
+                        Confirmed: Number(column.Confirmed),
+                        Country: country
+                    })
+                }
+            })
+            tab2.sort(function(a,b){
+                return parseInt(a.Confirmed)  - parseInt(b.Confirmed);
+            })
+            tab2.reverse();
+            sstate.setState({defaultConfirmed: tab2})
         })
     }
 
@@ -60,7 +91,7 @@ export default class Home extends Component {
                 </div>
 
                 <div className="mb-2 w-25">
-                    <Confirmed data={this.state.data} setName={this.setNameTarget}/>
+                    <Confirmed data={this.state.data} defaultConfirmed={this.state.defaultConfirmed} setName={this.setNameTarget}/>
                 </div>
 
                 <div className="w-25">
