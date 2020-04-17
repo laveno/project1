@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 
 export default class TotalConfirmed extends Component {
 
-    componentDidUpdate() {
-
-    }
-
     render() {
         if (this.props.total) {
             return (

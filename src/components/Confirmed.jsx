@@ -2,6 +2,39 @@ import React, { Component } from 'react';
 
 export default class Confirmed extends Component {
 
+    admin0Data() {
+        var tab = []
+        var country = null
+
+        this.props.data.map((column, index) => {
+            country = column.Country_Region
+            for (var x = 0; tab[x]; x++) {
+                if (country === tab[x].Country) {
+                    tab[x].Confirmed += Number(column.Confirmed)
+                    break;
+                }
+                if (tab[x + 1] == null) {
+                    tab.push({
+                        Confirmed: Number(column.Confirmed),
+                        Country: country
+                    })
+                    break;
+                }
+            }
+            if (tab.length === 0) {
+                tab.push({
+                    Confirmed: Number(column.Confirmed),
+                    Country: country
+                })
+            }
+        })
+        tab.sort(function(a,b){
+            return parseInt(a.Confirmed)  - parseInt(b.Confirmed);
+        })
+        tab.reverse();
+        console.log(tab)
+    }
+
     render() {
         
         if (this.props.data) {
@@ -26,7 +59,7 @@ export default class Confirmed extends Component {
                         </div>
                     </div>
                     <div className="text-center">
-                        <button style={{backgroundColor:"#24282c", border: 'solid 2px #141719'}} className="border-top-0 rounded-0 btn btn-outline-primary text-white mr-2 p-1 pl-2 pr-2">Admin0</button>
+                        <button onClick={this.admin0Data.bind(this)} style={{backgroundColor:"#24282c", border: 'solid 2px #141719'}} className="border-top-0 rounded-0 btn btn-outline-primary text-white mr-2 p-1 pl-2 pr-2">Admin0</button>
                         <button style={{backgroundColor:"#24282c", border: 'solid 2px #141719'}} className="border-top-0 rounded-0 btn btn-outline-primary text-white mr-2 p-1 pl-2 pr-2">Admin1</button>
                         <button style={{backgroundColor:"#24282c", border: 'solid 2px #141719'}} className="border-top-0 rounded-0 btn btn-outline-primary text-white p-1 pl-2 pr-2">Admin2</button>
                     </div>
