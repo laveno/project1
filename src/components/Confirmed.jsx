@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ListItemText from '@material-ui/core/ListItemText';
 
 export default class Confirmed extends Component {
 
@@ -7,19 +8,26 @@ export default class Confirmed extends Component {
         if (this.props.data) {
 
             const display = this.props.data.map((data, index) =>
-                <button onClick={this.props.setName.bind(this, data.Confirmed)} className="text-center p-0 m-0 list-group-item list-group-item-action list-group-item-dark" key={index}>
-                    <span className="text-danger">{"Confirmed" + data.confirmed ? data.confirmed : 'unknow'}</span>
+                <a data-toggle="list" href="#" className="list-group-item list-group-item-action bg-dark" onClick={this.props.setName.bind(this, data.Confirmed)} key={index}>
+                    <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"20px"}} className="font-weight-bold">{"Confirmed" + data.Confirmed ? data.Confirmed : 'unknow'}</span>
                     <span>&emsp;</span>
-                    <span className="text-dark">{"Combined_Key" + data.Combined_Key ? data.Combined_Key : 'unknow'}</span>
-                </button>
+                    <span className="text-white">{"Combined_Key" + data.Combined_Key ? data.Combined_Key : 'unknow'}</span>
+                </a>
             )
 
             return (
-                <div className='text-danger text-center bg-dark w-100 border border-secondary'>
-                    <div className="">
-                        <h6 className="p-3 text-white-50 font-weight-normal">Confirmed Cases by <br /> Country/Region/Sovereignty</h6>
-            <div className="">{display}</div>
+                <div className="text-left">
+
+                    <div style={{border: "solid #141719 2px"}} className="">
+
+                        <p style={{backgroundColor: '#141719',fontSize: '14px', paddingTop: '3%', paddingBottom: '3%', marginBottom: '0%'}} className="text-white font-weight-normal text-center">Confirmed Cases by <br /> Country/Region/Sovereignty</p>
+
+                        <div className="list-group">
+                            {display}
+                        </div>
+
                     </div>
+
                 </div>
             )
         } else return (<div>no data</div>)

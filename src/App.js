@@ -6,9 +6,11 @@ import Home from "./views/Home";
 function App() {
 
   return (
-    <Router>
-      <Route path='/' exact component={Home} />
-    </Router>
+    <div style={{backgroundColor: "#24282c"}}>
+      <Router>
+        <Route path='/' exact component={Home} />
+      </Router>
+    </div>
     )
 }
 

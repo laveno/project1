@@ -9,9 +9,9 @@ export default class TotalConfirmed extends Component {
     render() {
         if (this.props.total) {
             return (
-                <div className="pt-4 pb-3 text-danger text-center bg-dark border border-secondary">
+                <div style={{backgroundColor: '#141719'}}className="pt-4 pb-3 text-center">
                     <h3 className="text-white font-weight-normal">Total Confirmed</h3>
-                    <h1 className="">{this.props.total}</h1>
+                    <h1 style={{color: "#ff0000", fontSize:'70px', WebkitTextStroke: '1px black'}} className="">{this.props.total}</h1>
                 </div>
             )
         } else return (<div>no data</div>)
