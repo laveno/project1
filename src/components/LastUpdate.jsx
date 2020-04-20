@@ -5,7 +5,7 @@ export default class LastUpdate extends Component {
         if (this.props.data) {
 
             const last_update = this.props.data.slice(0,1).map((update, index) =>
-                <div>{update.Last_Update}</div>
+                <div key={index}>{update.Last_Update}</div>
             )
 
             return (

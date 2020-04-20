@@ -41,7 +41,7 @@ export default class Confirmed extends Component {
 
         this.props.data.map((column, index) => {
             province = column.Province_State
-            if (province != "") {
+            if (province !== "") {
                 for (var x = 0; tab[x]; x++) {
                     if (province === tab[x].ProvinceState) {
                         tab[x].Confirmed += Number(column.Confirmed)

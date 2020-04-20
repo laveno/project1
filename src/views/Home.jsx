@@ -5,6 +5,9 @@ import MapChart from "../components/MapChart"
 import * as d3 from 'd3';
 import LastUpdate from '../components/LastUpdate';
 import NbCountry from '../components/NbCountry';
+import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
 
 
 export default class Home extends Component {
@@ -86,27 +89,32 @@ export default class Home extends Component {
 
     render() {
         return (
-            <div className='row'>
-                <div className="d-flex flex-column">
+            <div className="">
+                <Container fluid>
+                        <Col>
+                            <div className="mb-2">
+                                <TotalConfirmed data={this.state.data} total={this.state.totalConfirmed}/>
+                            </div>
+                        </Col>
+                        <Col>
+                            <div className="mb-2">
+                                <Confirmed data={this.state.data} defaultConfirmed={this.state.defaultConfirmed} setName={this.setNameTarget}/>
+                            </div>
+                        </Col>
+                    <Row>
+                        <Col>
+                            <div className="">
+                                <LastUpdate data={this.state.data}/>
+                            </div>
+                        </Col>
 
-                    <div className="mb-2 w-25">
-                        <TotalConfirmed data={this.state.data} total={this.state.totalConfirmed}/>
-                    </div>
-
-                    <div className="mb-2 w-25">
-                        <Confirmed data={this.state.data} defaultConfirmed={this.state.defaultConfirmed} setName={this.setNameTarget}/>
-                    </div>
-
-                    <div className="w-25">
-                        <LastUpdate data={this.state.data}/>
-                    </div>
-
-                </div>
-                <div className="d-flex flex-column">
-                    <div className="w-25">
-                        <NbCountry nbCountry={this.state.nbCountry}/>
-                    </div>
-                </div>
+                        <Col>
+                            <div className="">
+                                <NbCountry nbCountry={this.state.nbCountry}/>
+                            </div>
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         )
     }
