@@ -4,6 +4,7 @@ import TotalConfirmed from "../components/TotalConfirmed"
 import MapChart from "../components/MapChart"
 import * as d3 from 'd3';
 import LastUpdate from '../components/LastUpdate';
+import NbCountry from '../components/NbCountry';
 
 
 export default class Home extends Component {
@@ -12,7 +13,8 @@ export default class Home extends Component {
         this.state = {
             data: null,
             totalConfirmed: null,
-            defaultConfirmed: null
+            defaultConfirmed: null,
+            nbCountry: null
         };
         this.setNameTarget = this.setNameTarget.bind(this);
     }
@@ -78,25 +80,33 @@ export default class Home extends Component {
             })
             tab2.reverse();
             sstate.setState({defaultConfirmed: tab2})
+            sstate.setState({nbCountry: tab2.length})
         })
     }
 
     render() {
         return (
-            <div className="d-flex flex-column">
+            <div className='row'>
+                <div className="d-flex flex-column">
 
-                <div className="mb-2 w-25">
-                    <TotalConfirmed data={this.state.data} total={this.state.totalConfirmed}/>
+                    <div className="mb-2 w-25">
+                        <TotalConfirmed data={this.state.data} total={this.state.totalConfirmed}/>
+                    </div>
+
+                    <div className="mb-2 w-25">
+                        <Confirmed data={this.state.data} defaultConfirmed={this.state.defaultConfirmed} setName={this.setNameTarget}/>
+                    </div>
+
+                    <div className="w-25">
+                        <LastUpdate data={this.state.data}/>
+                    </div>
+
                 </div>
-
-                <div className="mb-2 w-25">
-                    <Confirmed data={this.state.data} defaultConfirmed={this.state.defaultConfirmed} setName={this.setNameTarget}/>
+                <div className="d-flex flex-column">
+                    <div className="w-25">
+                        <NbCountry nbCountry={this.state.nbCountry}/>
+                    </div>
                 </div>
-
-                <div className="w-25">
-                    <LastUpdate data={this.state.data}/>
-                </div>
-
             </div>
         )
     }
