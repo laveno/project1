@@ -75,13 +75,14 @@ export default class Hospitalization extends Component {
 
                 display = this.props.defaultHospi.map((data, index) => 
                     <button href="#" className="list-group-item list-group-item-action bg-dark btn btn-dark" key={index}>
-                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"20px"}} className="font-weight-bold">{data.Tested ? data.Tested : 'unknow'}</span>
-                        <span>&emsp;</span>
-                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"20px"}} className="">Tested</span>
-                        <span> <br /> </span>
-                        <span className="text-white font-weight-bold">{data.ProvinceState ? data.ProvinceState : 'unknow'}</span>
+                        <span style={{color: "#0779e4", fontSize:"17px"}} className="font-weight-normal">{data.Tested ? data.Tested : 'unknow'}</span>
                         <span>&thinsp;</span>
-                        <span className="text-white">{data.Country ? data.Country : 'unknow'}</span>
+                        <span>&thinsp;</span>
+                        <span style={{color: "#0779e4", fontSize:"17px"}} className="">tested</span>
+                        <span> <br /> </span>
+                        <span className="text-white font-weight-normal">{data.ProvinceState ? data.ProvinceState : 'unknow'}</span>
+                        <span>&thinsp;</span>
+                        <span style={{color: "#D3D3D3"}}>{data.Country ? data.Country : 'unknow'}</span>
                     </button>
                 )
             }
@@ -89,26 +90,28 @@ export default class Hospitalization extends Component {
 
                 display = this.state.admin0Data.map((data, index) => 
                     <button href="#" className="list-group-item list-group-item-action bg-dark btn btn-dark" key={index}>
-                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"20px"}} className="font-weight-bold">{data.Tested ? data.Tested : ''}</span>
-                        <span>&emsp;</span>
-                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"20px"}} className="">Tested</span>
-                        <span> <br /> </span>
-                        <span className="text-white font-weight-bold">{data.ProvinceState ? data.ProvinceState : 'unknow'}</span>
+                        <span style={{color: "#0779e4", fontSize:"17px"}} className="font-weight-normal">{data.Tested ? data.Tested : 'unknow'}</span>
                         <span>&thinsp;</span>
-                        <span className="text-white">{data.Country ? data.Country : 'unknow'}</span>
+                        <span>&thinsp;</span>
+                        <span style={{color: "#0779e4", fontSize:"17px"}} className="">tested</span>
+                        <span> <br /> </span>
+                        <span className="text-white font-weight-normal">{data.ProvinceState ? data.ProvinceState : 'unknow'}</span>
+                        <span>&thinsp;</span>
+                        <span style={{color: "#D3D3D3"}}>{data.Country ? data.Country : 'unknow'}</span>
                     </button>
                 )
             }
             else {
                 display = this.state.admin1Data.map((data, index) => 
                     <button href="#" className="list-group-item list-group-item-action bg-dark btn btn-dark" key={index}>
-                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"20px"}} className="font-weight-bold">{data.Hospitalized ? data.Hospitalized : ''}</span>
+                        <span style={{color: "#D3D3D3", fontSize:"17px"}} className="font-weight-normal">{data.Hospitalized ? data.Hospitalized : ''}</span>
                         <span>&thinsp;</span>
-                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"20px"}} className="">hospitalized</span>
+                        <span>&thinsp;</span>
+                        <span style={{color: "#D3D3D3", fontSize:"17px"}} className="">hospitalized</span>
                         <span> <br /> </span>
-                        <span className="text-white font-weight-bold">{data.ProvinceState ? data.ProvinceState : 'unknow'}</span>
+                        <span className="text-white font-weight-normal">{data.ProvinceState ? data.ProvinceState : 'unknow'}</span>
                         <span>&thinsp;</span>
-                        <span className="text-white">{data.Country ? data.Country : 'unknow'}</span>
+                        <span style={{color: "#D3D3D3"}}>{data.Country ? data.Country : 'unknow'}</span>
                     </button>
                 )
             }
@@ -118,8 +121,8 @@ export default class Hospitalization extends Component {
 
                     <div style={{backgroundColor: '#141719', border:'solid 1px #484d53'}} className="">
 
-                        <p style={{fontSize: '14px', paddingTop: '3%', paddingBottom: '3%', marginBottom: '0%'}} className="text-white font-weight-normal text-center">{this.state.targetedSentence} <br /></p>
-                        <p style={{fontSize: '14px', paddingTop: '3%', paddingBottom: '3%', marginBottom: '0%'}} className="text-white font-weight-normal text-center">{this.props.defaultTotal} <br /></p>
+                    <h1 style={{paddingTop: '3%', paddingBottom: '3%', marginBottom: '0%'}} className=" h4 text-white font-weight-normal text-center">{this.state.targetedSentence} <br /></h1>
+                    <h1 style={{fontSize:'70px', color:"#0779e4"}} className="font-weight-normal text-center">{this.props.defaultTotal} <br /></h1>
 
                         <div style={{overflow:'auto', maxHeight:'650px'}} className="list-group">
                             {display}

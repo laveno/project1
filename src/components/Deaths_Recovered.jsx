@@ -105,7 +105,7 @@ export default class Deaths_Recovered extends Component {
 
                 display = this.state.Deaths.map((data, index) => 
                     <button style={{}} href="#" className="list-group-item list-group-item-action bg-dark btn btn-dark" key={index}>
-                        <span style={{color: "#ffffff", fontSize:"20px"}} className="font-weight-normal">{data.Deaths ? data.Deaths : 'unknow'}</span>
+                        <span style={{color: "#ffffff", fontSize:"17px"}} className="font-weight-normal">{data.Deaths ? data.Deaths : 'unknow'}</span>
                         <span>&thinsp;</span>
                         <span>&thinsp;</span>
                         <span style={{color: "#D3D3D3", fontSize:"17px"}} className="">deaths</span>
@@ -140,7 +140,7 @@ export default class Deaths_Recovered extends Component {
             else {
                 display = this.state.Recovered.map((data, index) => 
                     <button href="#" className="list-group-item list-group-item-action bg-dark btn btn-dark" key={index}>
-                        <span style={{color: "#32CD32", fontSize:"20px"}} className="font-weight-normal">{data.Recovered ? data.Recovered : 'unknow'}</span>
+                        <span style={{color: "#32CD32", fontSize:"17px"}} className="font-weight-normal">{data.Recovered ? data.Recovered : 'unknow'}</span>
                         <span>&thinsp;</span>
                         <span>&thinsp;</span>
                         <span style={{color: "#32CD32", fontSize:"17px"}} className="">recovered</span>

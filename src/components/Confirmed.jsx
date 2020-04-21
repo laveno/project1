@@ -119,9 +119,9 @@ export default class Confirmed extends Component {
 
                 display = this.props.defaultConfirmed.map((data, index) => 
                     <button href="#" className="list-group-item list-group-item-action bg-dark btn btn-dark" onClick={this.props.setName.bind(this, data.Confirmed, data.Country)} key={index}>
-                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"20px"}} className="font-weight-bold">{data.Confirmed ? data.Confirmed : 'unknow'}</span>
+                        <span style={{color: "#ff0000", fontSize:"17px", WebkitTextStroke: "0.3px black"}} className="font-weight-bold">{data.Confirmed ? data.Confirmed : 'unknow'}</span>
                         <span>&emsp;</span>
-                        <span className="text-white">{data.Country ? data.Country : 'unknow'}</span>
+                        <span style={{color: "#D3D3D3", fontSize:"17px"}} className="">{data.Country ? data.Country : 'unknow'}</span>
                     </button>
                 )
             }
@@ -129,37 +129,37 @@ export default class Confirmed extends Component {
 
                 display = this.state.admin0Data.map((data, index) => 
                     <button href="#" className="list-group-item list-group-item-action bg-dark btn btn-dark" onClick={this.props.setName.bind(this, data.Confirmed, data.Country)} key={index}>
-                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"20px"}} className="font-weight-bold">{data.Confirmed ? data.Confirmed : 'unknow'}</span>
+                        <span style={{color: "#ff0000", fontSize:"17px", WebkitTextStroke: "0.4px black"}} className="font-weight-bold">{data.Confirmed ? data.Confirmed : 'unknow'}</span>
                         <span>&emsp;</span>
-                        <span className="text-white">{data.Country ? data.Country : 'unknow'}</span>
+                        <span style={{color: "#D3D3D3", fontSize:"17px"}} className="">{data.Country ? data.Country : 'unknow'}</span>
                     </button>
                 )
             }
             else if (this.state.targetedTab === 1) {
                 display = this.state.admin1Data.map((data, index) => 
                     <button href="#" className="list-group-item list-group-item-action bg-dark btn btn-dark" onClick={this.props.setName.bind(this, data.Confirmed, data.Country, data.ProvinceState)} key={index}>
-                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"20px"}} className="font-weight-bold">{data.Confirmed ? data.Confirmed : 'unknow'}</span>
+                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"17px"}} className="font-weight-bold">{data.Confirmed ? data.Confirmed : 'unknow'}</span>
                         <span>&thinsp;</span>
-                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"20px"}} className="">confirmed</span>
+                        <span style={{color: "#ff0000", fontSize:"17px"}} className="">confirmed</span>
                         <span> <br /> </span>
-                        <span className="text-white font-weight-bold">{data.ProvinceState ? data.ProvinceState : 'unknow'}</span>
+                        <span style={{color: "#ffffff", fontSize:"17px"}} className="font-weight-bold">{data.ProvinceState ? data.ProvinceState : 'unknow'}</span>
                         <span>&thinsp;</span>
-                        <span className="text-white">{data.Country ? data.Country : 'unknow'}</span>
+                        <span style={{color: "#D3D3D3", fontSize:"17px"}} className="font-weight-normal">{data.Country ? data.Country : 'unknow'}</span>
                     </button>
                 )
             }
             else {
                 display = this.state.admin2Data.map((data, index) => 
                     <button href="#" className="list-group-item list-group-item-action bg-dark btn btn-dark" onClick={this.props.setName.bind(this, data.Confirmed, data.ProvinceState, data.Country, data.Admin2)} key={index}>
-                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"20px"}} className="font-weight-bold">{data.Confirmed ? data.Confirmed : 'unknow'}</span>
+                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"17px"}} className="font-weight-bold">{data.Confirmed ? data.Confirmed : 'unknow'}</span>
                         <span>&thinsp;</span>
-                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"20px"}} className="">confirmed</span>
+                        <span style={{color: "#ff0000", fontSize:"17px"}} className="">confirmed</span>
                         <span> <br /> </span>
-                        <span className="text-white">{"Combined_Key" + data.Admin2 ? data.Admin2 : 'unknow'}</span>
+                        <span style={{color: "#D3D3D3", fontSize:"17px"}} className="font-weight-normal">{"Combined_Key" + data.Admin2 ? data.Admin2 : 'unknow'}</span>
                         <span>&thinsp;</span>
                         <span className="text-white font-weight-bold">{data.ProvinceState ? data.ProvinceState : 'unknow'}</span>
                         <span>&thinsp;</span>
-                        <span className="text-white">{data.Country ? data.Country : 'unknow'}</span>
+                        <span style={{color: "#D3D3D3", fontSize:"17px"}} className="font-weight-normal">{data.Country ? data.Country : 'unknow'}</span>
                     </button>
                 )
             }
