@@ -24,6 +24,15 @@ export default class Home extends Component {
     }
 
     setNameTarget(value) {
+        console.log("change total")
+        if (value === "reset") {
+            var world_cases = 0;
+            this.state.data.map((confirmed, index) => {
+                world_cases = world_cases + Number(confirmed.Confirmed)
+            })
+            this.setState({totalConfirmed: world_cases})
+            return;
+        }
         this.setState({totalConfirmed: value})
     }
 
@@ -94,7 +103,7 @@ export default class Home extends Component {
                 <Container fluid>
                         <Col>
                             <div className="mb-2">
-                                <TotalConfirmed data={this.state.data} total={this.state.totalConfirmed}/>
+                                <TotalConfirmed data={this.state.data} total={this.state.totalConfirmed} setName={this.setNameTarget}/>
                             </div>
                         </Col>
                         <Col>
