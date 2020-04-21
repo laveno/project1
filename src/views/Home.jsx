@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Confirmed from "../components/Confirmed"
 import TotalConfirmed from "../components/TotalConfirmed"
 import MapChart from "../components/MapChart"
+import Deaths_Recovered from "../components/Deaths_Recovered"
 import * as d3 from 'd3';
 import LastUpdate from '../components/LastUpdate';
 import NbCountry from '../components/NbCountry';
@@ -113,6 +114,13 @@ export default class Home extends Component {
                                 <NbCountry nbCountry={this.state.nbCountry}/>
                             </div>
                         </Col>
+
+                        <Col>
+                            <div className="mb-2">
+                                <Deaths_Recovered data={this.state.data} />
+                            </div>
+                        </Col>
+
                     </Row>
                 </Container>
             </div>
