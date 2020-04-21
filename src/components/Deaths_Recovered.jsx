@@ -4,7 +4,7 @@ export default class Deaths_Recovered extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            targetedTab: -1,
+            targetedTab: 0,
             Deaths: [],
             Recovered: []
         };
@@ -12,41 +12,41 @@ export default class Deaths_Recovered extends Component {
 
     Recovered() {
         var tab = []
-        var province = null
+        var country = null
+        var recovered = null
 
         this.props.data.map((column, index) => {
-            province = column.Province_State
-            if (province !== "") {
-                for (var x = 0; tab[x]; x++) {
-                    if (province === tab[x].ProvinceState) {
-                        tab[x].Confirmed += Number(column.Confirmed)
-                        break;
+            country = column.Country_Region
+            recovered = column.Recovered
+            for (var x = 0; tab[x]; x++) {
+                if (recovered == tab[x].Recovered) {
+                    if (recovered == 0) {
+                        break
+                    } else {
+                    tab[x].Recovered += Number(column.Recovered)
+                    break
                     }
-                    if (tab[x + 1] == null) {
+                }
+                if (tab[x + 1] == null) {
                         tab.push({
-                            Confirmed: Number(column.Confirmed),
-                            Country: column.Country_Region,
-                            ProvinceState: column.Province_State
+                            Recovered: Number(column.Recovered),
+                            Country_Region: country
                         })
-                        break;
-                    }
+                        break
                 }
-                if (tab.length === 0) {
-                    tab.push({
-                        Confirmed: Number(column.Confirmed),
-                        Country: column.Country_Region,
-                        ProvinceState: column.Province_State
-                    })
-                }
+            }
+            if (tab.length == 0) {
+                tab.push({
+                    Recovered: Number(column.Recovered),
+                    Country_Region: country
+                })
             }
         })
         tab.sort(function(a,b){
-            return parseInt(a.Confirmed)  - parseInt(b.Confirmed);
+            return parseInt(a.Recovered)  - parseInt(b.Recovered);
         })
         tab.reverse();
-        tab = tab.slice(0, 75)
-        console.log(tab)
-        this.setState({admin1Data: tab})
+        this.setState({Recovered: tab})
         this.setState({targetedTab: 1})
     }
 
@@ -86,56 +86,91 @@ export default class Deaths_Recovered extends Component {
             return parseInt(a.Deaths)  - parseInt(b.Deaths);
         })
         tab.reverse();
-        console.log(tab)
         this.setState({Deaths: tab})
         this.setState({targetedTab: 0})
+    }
+
+    componentDidMount() {
+        this.Deaths()
     }
 
     render() {
         if (this.props.data) {
 
             var display
+            var total_deaths = 0
+            var total_recovered = 0
 
             if (this.state.targetedTab === 0) {
 
                 display = this.state.Deaths.map((data, index) => 
-                    <button href="#" className="list-group-item list-group-item-action bg-dark btn btn-dark" key={index}>
-                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"20px"}} className="font-weight-bold">{data.Deaths ? data.Deaths : 'unknow'}</span>
-                        <span>&emsp;</span>
-                        <span className="text-white">{data.Combined_Key ? data.Combined_Key : 'unknow'}</span>
+                    <button style={{}} href="#" className="list-group-item list-group-item-action bg-dark btn btn-dark" key={index}>
+                        <span style={{color: "#ffffff", fontSize:"20px"}} className="font-weight-normal">{data.Deaths ? data.Deaths : 'unknow'}</span>
+                        <span>&thinsp;</span>
+                        <span>&thinsp;</span>
+                        <span style={{color: "#D3D3D3", fontSize:"17px"}} className="">deaths</span>
+                        <span> <br /> </span>
+                        <span style={{color: "#D3D3D3"}} className="font-weight-normal">{data.Combined_Key ? data.Combined_Key : 'unknow'}</span>
                     </button>
                 )
+
+                this.state.Deaths.map((death, index) =>
+                    total_deaths = total_deaths + death.Deaths
+                )
+
+                return (
+
+                    <div className="text-left">
+                        <div style={{backgroundColor: '#141719', border:'solid 1px #484d53'}} className="">
+                        <h1 style={{paddingTop: '3%', paddingBottom: '3%', marginBottom: '0%'}} className=" h4 text-white font-weight-normal text-center">Total Deaths</h1>
+                            <h1 style={{fontSize:'70px'}} className="text-white font-weight-normal text-center">{total_deaths}</h1>
+                                <div style={{overflow:'auto', maxHeight:'650px'}} className="list-group">
+                                    {display}
+                                </div>
+                        </div>
+                        <div className="text-center">
+                            <button onClick={this.Deaths.bind(this)} style={{backgroundColor:"#24282c", border: 'solid 2px #141719'}} className="border-top-0 rounded-0 btn btn-outline-primary text-white mr-2 p-1 pl-2 pr-2">Deaths</button>
+                            <button onClick={this.Recovered.bind(this)} style={{backgroundColor:"#24282c", border: 'solid 2px #141719'}} className="border-top-0 rounded-0 btn btn-outline-primary text-white mr-2 p-1 pl-2 pr-2">Recovered</button>
+                        </div>
+    
+                    </div>
+                )
             }
+
             else {
                 display = this.state.Recovered.map((data, index) => 
                     <button href="#" className="list-group-item list-group-item-action bg-dark btn btn-dark" key={index}>
-                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"20px"}} className="font-weight-bold">{data.Recovered ? data.Recovered : 'unknow'}</span>
+                        <span style={{color: "#32CD32", fontSize:"20px"}} className="font-weight-normal">{data.Recovered ? data.Recovered : 'unknow'}</span>
                         <span>&thinsp;</span>
-                        <span style={{WebkitTextStroke: '0.4px black',color: "#ff0000", fontSize:"20px"}} className="">recovered</span>
+                        <span>&thinsp;</span>
+                        <span style={{color: "#32CD32", fontSize:"17px"}} className="">recovered</span>
                         <span> <br /> </span>
-                        <span className="text-white font-weight-bold">{data.ProvinceState ? data.ProvinceState : 'unknow'}</span>
-                        <span>&thinsp;</span>
-                        <span className="text-white">{data.Country ? data.Country : 'unknow'}</span>
+                        <span className="text-white font-weight-normal">{data.Country_Region ? data.Country_Region : 'unknow'}</span>
                     </button>
                 )
-            }
 
-            return (
-                <div className="text-left">
+                this.state.Recovered.map((recovered, index) =>
+                    total_recovered = total_recovered + recovered.Recovered
+                )
 
-                    <div style={{backgroundColor: '#141719', border:'solid 1px #484d53'}} className="">
-                        <div style={{overflow:'auto', maxHeight:'650px'}} className="list-group">
-                            {display}
+                return (
+                    <div className="text-left">
+    
+                        <div style={{backgroundColor: '#141719', border:'solid 1px #484d53'}} className="">
+                        <h1 style={{paddingTop: '3%', paddingBottom: '3%', marginBottom: '0%'}} className=" h4 text-white font-weight-normal text-center">Total Recovered</h1>
+                        <h1 style={{fontSize:'70px', color:"#32CD32"}} className="font-weight-normal text-center">{total_recovered}</h1>
+                            <div style={{overflow:'auto', maxHeight:'650px'}} className="list-group">
+                                {display}
+                            </div>
                         </div>
+                        <div className="text-center">
+                            <button onClick={this.Deaths.bind(this)} style={{backgroundColor:"#24282c", border: 'solid 2px #141719'}} className="border-top-0 rounded-0 btn btn-outline-primary text-white mr-2 p-1 pl-2 pr-2">Deaths</button>
+                            <button onClick={this.Recovered.bind(this)} style={{backgroundColor:"#24282c", border: 'solid 2px #141719'}} className="border-top-0 rounded-0 btn btn-outline-primary text-white mr-2 p-1 pl-2 pr-2">Recovered</button>
+                        </div>
+    
                     </div>
-                    <div className="text-center">
-                        <button onClick={this.Deaths.bind(this)} style={{backgroundColor:"#24282c", border: 'solid 2px #141719'}} className="border-top-0 rounded-0 btn btn-outline-primary text-white mr-2 p-1 pl-2 pr-2">Deaths</button>
-                        <button onClick={this.Recovered.bind(this)} style={{backgroundColor:"#24282c", border: 'solid 2px #141719'}} className="border-top-0 rounded-0 btn btn-outline-primary text-white mr-2 p-1 pl-2 pr-2">Recovered</button>
-                    </div>
-
-                </div>
-            )
-        } else return (<div>no data</div>)
-        
+                )
+            }
+        } else return (null)
     }
 }

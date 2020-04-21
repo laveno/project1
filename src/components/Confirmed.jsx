@@ -183,7 +183,6 @@ export default class Confirmed extends Component {
 
                 </div>
             )
-        } else return (<div>no data</div>)
-        
+        } else return (null)
     }
 }

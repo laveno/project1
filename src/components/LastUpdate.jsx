@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class LastUpdate extends Component {
     render() {
         if (this.props.data) {
-
+        
             const last_update = this.props.data.slice(0,1).map((update, index) =>
                 <div key={index}>{update.Last_Update}</div>
             )
@@ -14,6 +14,6 @@ export default class LastUpdate extends Component {
                     <span className="text-white h3">{last_update}</span>
                 </div>
             )
-        } else return (<div>no data</div>)
+        } else return (null)
     }
 }

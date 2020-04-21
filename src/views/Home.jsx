@@ -98,41 +98,54 @@ export default class Home extends Component {
     }
 
     render() {
-        return (
-            <div className="">
-                <Container fluid>
-                        <Col>
-                            <div className="mb-2">
-                                <TotalConfirmed data={this.state.data} total={this.state.totalConfirmed} setName={this.setNameTarget}/>
-                            </div>
-                        </Col>
-                        <Col>
-                            <div className="mb-2">
-                                <Confirmed data={this.state.data} defaultConfirmed={this.state.defaultConfirmed} setName={this.setNameTarget}/>
-                            </div>
-                        </Col>
-                    <Row>
-                        <Col>
-                            <div className="">
-                                <LastUpdate data={this.state.data}/>
-                            </div>
-                        </Col>
 
-                        <Col>
-                            <div className="">
-                                <NbCountry nbCountry={this.state.nbCountry}/>
-                            </div>
-                        </Col>
-
-                        <Col>
-                            <div className="mb-2">
-                                <Deaths_Recovered data={this.state.data} />
-                            </div>
-                        </Col>
-
-                    </Row>
-                </Container>
-            </div>
-        )
+        if (this.state.data) {
+            return (
+                <div className="">
+                    <Container fluid className="mb-2">
+                        <div style={{backgroundColor: '#141719', border:'solid 1px #484d53'}} className="pb-1 pt-2">
+                            <h3 className="ml-5 pl-5 text-white font-weight-normal">COVID-19 Dashboard by the Center for Systems
+                                Science and Engineering (CSSE) at Johns Hopkins University (JHU)
+                            </h3>
+                        </div>
+                    </Container>
+                    <Container fluid>
+                        <Row>
+                            <Col>
+                                <div style={{maxWidth:"26em"}} className="mb-2">
+                                    <TotalConfirmed data={this.state.data} total={this.state.totalConfirmed} setName={this.setNameTarget}/>
+                                </div>
+                                <div style={{maxWidth:"26em"}} className="mb-2">
+                                    <Confirmed data={this.state.data} defaultConfirmed={this.state.defaultConfirmed} setName={this.setNameTarget}/>
+                                </div>
+                            </Col>
+                            <Col>
+                                <div style={{maxWidth:"26em"}} className="mb-2">
+                                    <Deaths_Recovered data={this.state.data} />
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <div style={{maxWidth:"26em"}} className="mb-2">
+                                    <LastUpdate data={this.state.data}/>
+                                </div>
+                            </Col>
+                            <Col>
+                                <div style={{maxWidth:"12em"}} className="">
+                                    <NbCountry nbCountry={this.state.nbCountry}/>
+                                </div>
+                            </Col>
+                        </Row>
+                    </Container>
+                </div>
+            )
+        } else {
+            return (
+                    <div style={{left:"50%",top:"50%",position:"fixed"}} className="spinner-border text-danger" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </div>
+            )
+        }
     }
 }
