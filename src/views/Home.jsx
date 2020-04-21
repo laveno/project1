@@ -6,6 +6,7 @@ import Deaths_Recovered from "../components/Deaths_Recovered"
 import * as d3 from 'd3';
 import LastUpdate from '../components/LastUpdate';
 import NbCountry from '../components/NbCountry';
+import Hospitalization from "../components/Hospitalization"
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -16,11 +17,20 @@ export default class Home extends Component {
         super(props);
         this.state = {
             data: null,
+            dataUs: null,
             totalConfirmed: null,
             defaultConfirmed: null,
-            nbCountry: null
+            defaultTotalUsHospi: null,
+            nbCountry: null,
+            defaultHospi: null,
         };
         this.setNameTarget = this.setNameTarget.bind(this);
+        this.setTotalHospi = this.setTotalHospi.bind(this);
+    }
+
+    setTotalHospi(value) {
+        console.log("change total hospi")
+        this.setState({defaultTotalUsHospi: value})
     }
 
     setNameTarget(value) {
@@ -95,6 +105,42 @@ export default class Home extends Component {
             sstate.setState({defaultConfirmed: tab2})
             sstate.setState({nbCountry: tab2.length})
         })
+
+        var tabUs = []
+        var iUs = 0
+        console.log(actual_date)
+        d3.csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/' + actual_date + '.csv', function(dataaUs, error) {
+            if (dataaUs) {
+                tabUs[iUs] = dataaUs
+                iUs++
+            } else {
+               console.log(error)
+            }
+        }).then(function(dataaUs) {
+            sstate.setState({dataUs: tabUs})
+            var tab2Us = []                                                           //Default State of Hospitalization Component
+            var province = null
+            var totalUsHospi = 0
+            sstate.state.dataUs.map((column, index) => {
+                if (column.Country_Region === "US") {
+                    province = column.Province_State
+                    totalUsHospi += Number(column.People_Tested)
+                    tab2Us.push({
+                        Tested: Number(column.People_Tested),
+                        Country: column.Country_Region,
+                        ProvinceState: column.Province_State
+                    })
+                }
+            })
+            tab2Us.sort(function(a,b){
+                return parseInt(a.Tested)  - parseInt(b.Tested);
+            })
+            tab2Us.reverse();
+            tab2Us = tab2Us.slice(0, 50)
+            console.log(tab2Us)
+            sstate.setState({defaultHospi: tab2Us})
+            sstate.setState({defaultTotalUsHospi: totalUsHospi})
+        })
     }
 
     render() {
@@ -122,6 +168,11 @@ export default class Home extends Component {
                             <Col>
                                 <div style={{maxWidth:"26em"}} className="mb-2">
                                     <Deaths_Recovered data={this.state.data} />
+                                </div>
+                            </Col>
+                            <Col>
+                                <div style={{maxWidth:"26em"}} className="mb-2">
+                                <Hospitalization data={this.state.dataUs} defaultHospi= {this.state.defaultHospi} defaultTotal={this.state.defaultTotalUsHospi} setTotalHospi={this.setTotalHospi}/>
                                 </div>
                             </Col>
                         </Row>
