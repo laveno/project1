@@ -86,6 +86,7 @@ export default class Deaths_Recovered extends Component {
             return parseInt(a.Deaths)  - parseInt(b.Deaths);
         })
         tab.reverse();
+        tab = tab.slice(0, 250)
         this.setState({Deaths: tab})
         this.setState({targetedTab: 0})
     }

@@ -141,6 +141,15 @@ export default class Home extends Component {
             sstate.setState({defaultHospi: tab2Us})
             sstate.setState({defaultTotalUsHospi: totalUsHospi})
         })
+
+        d3.csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv', function(data, error) {
+            if (data) {
+
+            } else {
+               console.log(error)
+            }
+        }).then(function(dataaUs) {
+        })
     }
 
     render() {
