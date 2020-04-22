@@ -171,7 +171,7 @@ export default class Confirmed extends Component {
 
                         <p style={{fontSize: '14px', paddingTop: '3%', paddingBottom: '3%', marginBottom: '0%'}} className="text-white font-weight-normal text-center">Confirmed Cases by <br /> Country/Region/Sovereignty</p>
 
-                        <div style={{overflow:'auto', maxHeight:'650px'}} className="list-group">
+                        <div style={{overflow:'auto', maxHeight:'551px'}} className="list-group">
                             {display}
                         </div>
                     </div>
