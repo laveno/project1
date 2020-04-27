@@ -9,9 +9,9 @@ export default class LastUpdate extends Component {
             )
 
             return (
-                <div style={{backgroundColor: '#141719', border:'solid 1px #484d53'}}className="text-center pb-1 pt-1">
-                    <span className="text-white h6 font-weight-normal">Last Updated at (YYYY/M/D)</span>
-                    <span className="text-white h3">{last_update}</span>
+                <div style={{color: "#D3D3D3", backgroundColor: '#141719', border:'solid 1px #484d53'}}className="text-center pb-1 pt-1">
+                    <span className="h6 font-weight-normal">Last Updated at (YYYY/M/D)</span>
+                    <span className="h3">{last_update}</span>
                 </div>
             )
         } else return (null)

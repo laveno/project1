@@ -7,6 +7,8 @@ import * as d3 from 'd3';
 import LastUpdate from '../components/LastUpdate';
 import NbCountry from '../components/NbCountry';
 import Hospitalization from "../components/Hospitalization"
+import Title from "../components/Title"
+import Description from "../components/Description"
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -173,42 +175,43 @@ export default class Home extends Component {
             return (
                 <div className="">
                     <Container fluid className="mb-2">
-                        <div style={{backgroundColor: '#141719', border:'solid 1px #484d53'}} className="pb-1 pt-2">
-                            <h3 className="ml-5 pl-5 text-white font-weight-normal">COVID-19 Dashboard by the Center for Systems
-                                Science and Engineering (CSSE) at Johns Hopkins University (JHU)
-                            </h3>
-                        </div>
+                        <Title />
                     </Container>
                     <Container fluid>
                         <Row>
-                            <Col>
-                                <div style={{maxWidth:"26em"}} className="mb-2">
+                            <Col style={{maxWidth:"26em"}}>
+                                <div className="mb-2">
                                     <TotalConfirmed data={this.state.data} total={this.state.totalConfirmed} setName={this.setNameTarget}/>
                                 </div>
-                                <div style={{maxWidth:"26em"}} className="mb-2">
+                                <div className="mb-2">
                                     <Confirmed data={this.state.data} defaultConfirmed={this.state.defaultConfirmed} setName={this.setNameTarget}/>
                                 </div>
                             </Col>
-                            <Col>
-                                <div style={{maxWidth:"26em"}} className="mb-2">
+                            <Col style={{maxWidth:"26em"}}>
+                                <div className="mb-2">
                                     <Deaths_Recovered data={this.state.data} />
                                 </div>
                             </Col>
-                            <Col>
-                                <div style={{maxWidth:"26em"}} className="mb-2">
+                            <Col style={{maxWidth:"26em"}}>
+                                <div className="mb-2">
                                 <Hospitalization data={this.state.dataUs} defaultHospi= {this.state.defaultHospi} defaultTotal={this.state.defaultTotalUsHospi} setTotalHospi={this.setTotalHospi}/>
                                 </div>
                             </Col>
                         </Row>
                         <Row>
-                            <Col>
-                                <div style={{maxWidth:"26em"}} className="mb-2">
+                            <Col style={{flexGrow:"", maxWidth:"26em", marginTop:"56px"}}>
+                                <div className="mb-2">
                                     <LastUpdate data={this.state.data}/>
                                 </div>
                             </Col>
-                            <Col>
-                                <div style={{maxWidth:"12em"}} className="">
+                            <Col style={{flexGrow:"", maxWidth:"12em"}}>
+                                <div className="">
                                     <NbCountry nbCountry={this.state.nbCountry}/>
+                                </div>
+                            </Col>
+                            <Col style={{flexGrow:"", maxWidth:"64em"}}>
+                                <div className="">
+                                    <Description />
                                 </div>
                             </Col>
                         </Row>

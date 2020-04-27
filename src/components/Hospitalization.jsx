@@ -124,7 +124,7 @@ export default class Hospitalization extends Component {
                     <h1 style={{paddingTop: '3%', paddingBottom: '3%', marginBottom: '0%'}} className=" h4 text-white font-weight-normal text-center">{this.state.targetedSentence} <br /></h1>
                     <h1 style={{fontSize:'70px', color:"#0779e4"}} className="font-weight-normal text-center">{this.props.defaultTotal} <br /></h1>
 
-                        <div style={{overflow:'auto', maxHeight:'650px'}} className="list-group">
+                        <div style={{overflow:'auto', maxHeight:'551px'}} className="list-group">
                             {display}
                         </div>
                     </div>
