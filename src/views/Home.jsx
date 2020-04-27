@@ -10,6 +10,8 @@ import Hospitalization from "../components/Hospitalization"
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
+import axios from 'axios';
+import Papa from 'papaparse'
 
 
 export default class Home extends Component {
@@ -23,6 +25,7 @@ export default class Home extends Component {
             defaultTotalUsHospi: null,
             nbCountry: null,
             defaultHospi: null,
+            graphData: null
         };
         this.setNameTarget = this.setNameTarget.bind(this);
         this.setTotalHospi = this.setTotalHospi.bind(this);
@@ -142,13 +145,25 @@ export default class Home extends Component {
             sstate.setState({defaultTotalUsHospi: totalUsHospi})
         })
 
-        d3.csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv', function(data, error) {
-            if (data) {
-
-            } else {
-               console.log(error)
+        var end = []
+        var y = 0
+        var x = 4
+        var totalDay = 0
+        axios.get(`https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv`)
+        .then(res => {
+            var results = Papa.parse(res.data);
+            for (; results.data[0][x]; x++) {
+                totalDay = 0
+                for (y = 1; results.data[y][x]; y++) {
+                    totalDay += Number(results.data[y][x])
+                }
+                end.push({
+                    Day: results.data[0][x],
+                    Cases: totalDay
+                })
             }
-        }).then(function(dataaUs) {
+            sstate.setState({graphData: end})
+            console.log(sstate.state.graphData)
         })
     }
 
