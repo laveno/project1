@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Confirmed from "../components/Confirmed"
 import TotalConfirmed from "../components/TotalConfirmed"
 import MapChart from "../components/MapChart"
+import Graphs from "../components/Graphs"
 import Deaths_Recovered from "../components/Deaths_Recovered"
 import * as d3 from 'd3';
 import LastUpdate from '../components/LastUpdate';
@@ -196,6 +197,9 @@ export default class Home extends Component {
                                 <div className="mb-2">
                                 <Hospitalization data={this.state.dataUs} defaultHospi= {this.state.defaultHospi} defaultTotal={this.state.defaultTotalUsHospi} setTotalHospi={this.setTotalHospi}/>
                                 </div>
+                            </Col>
+                            <Col style={{flexGrow:"0"}}>
+                                <Graphs data={this.state.graphData}/>
                             </Col>
                         </Row>
                         <Row>
