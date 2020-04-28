@@ -28,7 +28,8 @@ export default class Home extends Component {
             defaultTotalUsHospi: null,
             nbCountry: null,
             defaultHospi: null,
-            graphData: null
+            graphData: null,
+            graphDaily: null
         };
         this.setNameTarget = this.setNameTarget.bind(this);
         this.setTotalHospi = this.setTotalHospi.bind(this);
@@ -167,6 +168,21 @@ export default class Home extends Component {
             }
             sstate.setState({graphData: end})
             console.log(sstate.state.graphData)
+
+            x = end.length - 1
+            var dailyCases = []
+            for (; end[x - 1]; x--) {
+                dailyCases.push({
+                    Day: end[x].Day,
+                    Cases: end[x].Cases - end[x - 1].Cases
+                })
+            }
+            dailyCases.push({
+                Day: end[x].Day,
+                Cases: end[x].Cases
+            })
+            sstate.setState({graphDaily: dailyCases})
+            console.log(sstate.state.graphDaily)
         })
     }
 
