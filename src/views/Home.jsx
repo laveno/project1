@@ -36,12 +36,10 @@ export default class Home extends Component {
     }
 
     setTotalHospi(value) {
-        console.log("change total hospi")
         this.setState({defaultTotalUsHospi: value})
     }
 
     setNameTarget(value) {
-        console.log("change total")
         if (value === "reset") {
             var world_cases = 0;
             this.state.data.map((confirmed, index) => {
@@ -115,7 +113,6 @@ export default class Home extends Component {
 
         var tabUs = []
         var iUs = 0
-        console.log(actual_date)
         d3.csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/' + actual_date + '.csv', function(dataaUs, error) {
             if (dataaUs) {
                 tabUs[iUs] = dataaUs
@@ -144,7 +141,6 @@ export default class Home extends Component {
             })
             tab2Us.reverse();
             tab2Us = tab2Us.slice(0, 50)
-            console.log(tab2Us)
             sstate.setState({defaultHospi: tab2Us})
             sstate.setState({defaultTotalUsHospi: totalUsHospi})
         })
@@ -167,7 +163,6 @@ export default class Home extends Component {
                 })
             }
             sstate.setState({graphData: end})
-            console.log(sstate.state.graphData)
 
             x = end.length - 1
             var dailyCases = []
@@ -182,7 +177,6 @@ export default class Home extends Component {
                 Cases: end[x].Cases
             })
             sstate.setState({graphDaily: dailyCases})
-            console.log(sstate.state.graphDaily)
         })
     }
 
@@ -215,7 +209,7 @@ export default class Home extends Component {
                                 </div>
                             </Col>
                             <Col style={{flexGrow:"0"}}>
-                                <Graphs data={this.state.graphData}/>
+                                <Graphs data={this.state.graphData} data_daily={this.state.graphDaily}/>
                             </Col>
                         </Row>
                         <Row>

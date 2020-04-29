@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, ReferenceLine, ReferenceArea,
     ReferenceDot, Tooltip, CartesianGrid, Legend, Brush, ErrorBar, AreaChart, Area,
-    Label, LabelList, Scatter, ScatterChart } from 'recharts';
+    Label, LabelList, Scatter, ScatterChart, Bar, BarChart } from 'recharts';
 
 export default class Graphs extends Component {
     constructor(props) {
@@ -11,7 +11,21 @@ export default class Graphs extends Component {
         };
     }
 
+    confirmed() {
+        this.setState({targetedTab: 0})
+    }
+
+    logarithmic() {
+        this.setState({targetedTab: 1})
+    }
+
+    dailycases() {
+        this.setState({targetedTab: 2})
+    }
+
+
     render() {
+        console.log(this.props.data_daily)
 
         var display
 
@@ -38,7 +52,7 @@ export default class Graphs extends Component {
                             margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="Day" name="Month" hide="false"/>
-                            <YAxis dataKey="Cases" name="Cases" />
+                            <YAxis dataKey="Cases" name="Cases" type="number"/>
                             <Tooltip cursor={{ stroke: 'red', strokeDasharray:"3 3" }} itemStyle={{color:"#ffffff"}} contentStyle={{backgroundColor: '#141719', border:'solid 1px #484d53'}}/>
                             <Scatter name="Day" data={this.props.data} fill="#ff0000" />
                         </ScatterChart>
@@ -47,24 +61,29 @@ export default class Graphs extends Component {
 
             else if (this.state.targetedTab === 2) {
                     display = <div style={{backgroundColor: '#141719', border:'solid 1px #484d53'}}>
-                        <ScatterChart height={400} width={600} className="text-white font-weight-normal"
-                            margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="Day" name="Month" hide="false"/>
-                            <YAxis dataKey="Cases" name="Cases" />
-                            <Tooltip cursor={{ stroke: 'red', strokeDasharray:"3 3" }} itemStyle={{color:"#ffffff"}} contentStyle={{backgroundColor: '#141719', border:'solid 1px #484d53'}}/>
-                            <Scatter name="Day" data={this.props.data} fill="#ff0000" />
-                        </ScatterChart>
-                    </div>
+                            <BarChart
+                                height={400}
+                                width={600}
+                                className="text-white font-weight-normal"
+                                margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+                                data={this.props.data_daily}
+                                >
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="Day" hide="false"/>
+                                <YAxis />
+                                <Tooltip cursor={{ stroke: 'red', strokeDasharray:"3 3" }} itemStyle={{color:"#ffffff"}} contentStyle={{backgroundColor: '#141719', border:'solid 1px #484d53'}}/>
+                                <Bar dataKey="Cases" fill="#ff0000"/>
+                            </BarChart>
+                        </div>
             }
 
             return (
                 <div>
                     {display}
                     <div className="text-center">
-                        <button style={{backgroundColor:"#24282c", border: 'solid 2px #141719'}} className="border-top-0 rounded-0 btn btn-outline-primary text-white mr-2 p-1 pl-2 pr-2">Confirmed</button>
-                        <button  style={{backgroundColor:"#24282c", border: 'solid 2px #141719'}} className="border-top-0 rounded-0 btn btn-outline-primary text-white mr-2 p-1 pl-2 pr-2">Logarithmic</button>
-                        <button  style={{backgroundColor:"#24282c", border: 'solid 2px #141719'}} className="border-top-0 rounded-0 btn btn-outline-primary text-white p-1 pl-2 pr-2">Daily Cases</button>
+                        <button onClick={this.confirmed.bind(this)} style={{backgroundColor:"#24282c", border: 'solid 2px #141719'}} className="border-top-0 rounded-0 btn btn-outline-primary text-white mr-2 p-1 pl-2 pr-2">Confirmed</button>
+                        <button onClick={this.logarithmic.bind(this)} style={{backgroundColor:"#24282c", border: 'solid 2px #141719'}} className="border-top-0 rounded-0 btn btn-outline-primary text-white mr-2 p-1 pl-2 pr-2">Logarithmic</button>
+                        <button onClick={this.dailycases.bind(this)} style={{backgroundColor:"#24282c", border: 'solid 2px #141719'}} className="border-top-0 rounded-0 btn btn-outline-primary text-white p-1 pl-2 pr-2">Daily Cases</button>
                     </div>
                 </div>
             )
