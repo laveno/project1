@@ -97,6 +97,7 @@ export default class Home extends Component {
     }
 
     render() {
+        console.log(this.state.data)
         return (
             <div className="">
                 <Container fluid>
@@ -123,6 +124,12 @@ export default class Home extends Component {
                             </div>
                         </Col>
                     </Row>
+                    <Col>
+                            <div className="">
+                                <MapChart data={this.state.data}/>
+                            </div>
+                        </Col>
+
                 </Container>
             </div>
         )
