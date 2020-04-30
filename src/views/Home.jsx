@@ -230,9 +230,12 @@ export default class Home extends Component {
                                 </div>
                             </Col>
                         </Row>
-                        <Col>
+                        <Col style={{marginLeft:"500px", flexGrow:"", maxWidth:"64em", border:'solid 1px #484d53', backgroundColor: '#141719'}}>
                             <div className="">
+                                <h1 style={{textAlign: "center"}} className=" pt-3 text-white font-weight-normal">MAP of cumulative confirmed cases</h1>
+                                <h3 className="text-white font-weight-normal text-center">(marker by country )</h3>
                                 <MapChart data={this.state.data}/>
+                                <h3 style={{color: 'white'}}>*Detailed marker for US</h3>
                             </div>
                         </Col>
                     </Container>

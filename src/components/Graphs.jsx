@@ -2,15 +2,12 @@ import React, { Component } from 'react'
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, ReferenceLine, ReferenceArea,
     ReferenceDot, Tooltip, CartesianGrid, Legend, Brush, ErrorBar, AreaChart, Area,
     Label, LabelList, Scatter, ScatterChart, Bar, BarChart } from 'recharts';
-import CanvasJSReact from "./canvasjs.react";
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default class Graphs extends Component {
     constructor(props) {
         super(props);
         this.state = {
             targetedTab: 0,
-            options: {}
         };
     }
 
@@ -19,25 +16,6 @@ export default class Graphs extends Component {
     }
 
     logarithmic() {
-        const optionss = {
-			animationEnabled: true,
-			theme: "light2",
-			title: {
-				text: ""
-			},
-			axisY: {
-				title: "",
-				logarithmic: true,
-				includeZero: false
-			},
-			data: [{
-				type: "spline",
-				showInLegend: true,
-				legendText: "",
-				dataPoints: [this.props.data]
-			}]
-        }
-        this.setState({options: optionss})
         this.setState({targetedTab: 1})
     }
 
@@ -70,9 +48,14 @@ export default class Graphs extends Component {
             else if (this.state.targetedTab === 1) {
 
                     display = <div style={{backgroundColor: '#141719', border:'solid 1px #484d53'}}>
-                        <CanvasJSChart options = {this.state.options} 
-				            /* onRef={ref => this.chart = ref} */
-			            />
+                        <ScatterChart height={400} width={600} className="text-white font-weight-normal"
+                            margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="Day" name="Month" hide="false"/>
+                            <YAxis dataKey="Cases" name="Cases" type="number"/>
+                            <Tooltip cursor={{ stroke: 'red', strokeDasharray:"3 3" }} itemStyle={{color:"#ffffff"}} contentStyle={{backgroundColor: '#141719', border:'solid 1px #484d53'}}/>
+                            <Scatter name="Day" data={this.props.data} fill="#ff0000" />
+                        </ScatterChart>
                     </div>
             }
 
