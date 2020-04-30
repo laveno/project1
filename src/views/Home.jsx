@@ -176,6 +176,7 @@ export default class Home extends Component {
                 Day: end[x].Day,
                 Cases: end[x].Cases
             })
+            dailyCases.reverse()
             sstate.setState({graphDaily: dailyCases})
         })
     }
