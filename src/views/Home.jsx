@@ -230,6 +230,11 @@ export default class Home extends Component {
                                 </div>
                             </Col>
                         </Row>
+                        <Col>
+                            <div className="">
+                                <MapChart data={this.state.data}/>
+                            </div>
+                        </Col>
                     </Container>
                 </div>
             )
